@@ -1,0 +1,34 @@
+
+<?php
+$produits = [
+    ["nom" => "Chaussures", "prix" => 25],
+    ["nom" => "Sac", "prix" => 15],
+    ["nom" => "Montre", "prix" => 20]
+];
+
+echo "<h1>Ma Boutique</h1>";
+
+foreach ($produits as $produit) {
+    echo "<div>";
+    echo "<h2>" . $produit["nom"] . "</h2>";
+    echo "<p>Prix : " . $produit["prix"] . " $</p>";
+
+    echo "<a href='?acheter=" .
+         urlencode($produit["nom"]) .
+         "'>Acheter</a>";
+
+    echo "</div><hr>";
+}
+
+if (isset($_GET["acheter"])) {
+    $nom = $_GET["acheter"];
+
+    foreach ($produits as $produit) {
+        if ($produit["nom"] === $nom) {
+            echo "<h2>Produit sélectionné !</h2>";
+            echo "Vous avez choisi : " .
+                 htmlspecialchars($nom);
+        }
+    }
+}
+?>
